@@ -1,21 +1,22 @@
 import re
 import subprocess
 import time
+from simple_chalk import chalk
 # import pyradamsa
 
-def run_win_cmd(cmd):
+def run_win_cmd(cmd) -> str:
     result = []
-    process = subprocess.Popen(cmd,
-                               shell=True,
-                               stdout=subprocess.PIPE,
-                               stderr=subprocess.PIPE)
+    process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     for line in process.stdout:
         result.append(line)
     errcode = process.returncode
     for line in result:
-        print(line.replace(b'\n', b'').decode('utf-8'))
+        if "Complete" in line.replace(b'\n', b'').decode('utf-8'):
+            print(chalk.bold(chalk.green(line.replace(b'\n', b'').decode('utf-8'))))
+        else:
+            print(chalk.gray(line.replace(b'\n', b'').decode('utf-8')))
     if errcode is not None:
-        raise Exception('cmd %s failed, see above for details', cmd)
+        raise Exception(chalk.red('cmd %s failed, see above for details'), cmd)
 
 def deduplication(List) -> list:
     return list(set(List))
@@ -40,15 +41,15 @@ def regex(pattern, string, split) -> list:
         return list2list(matchOB, split)
 
 
-def deeplink_fuzzing(deeplink_scheme):
+def deeplink_fuzzing(deeplink_scheme) -> None:
     fuzz_string='NABOMHALANG'
     for i in deeplink_scheme:
         time.sleep(5)
-        print("=============================================================")
-        print(f""" Command: adb shell "am start -W -a android.intent.action.VIEW -d '{i}://{fuzz_string}'" """)
-        run_win_cmd(f""" adb shell "am start -W -a android.intent.action.VIEW -d '{i}://{fuzz_string}'" """)
+        print("============================================================================================================================")
+        print(chalk.blue(f"""Command: adb shell "am start -W -a android.intent.action.VIEW -d '{i}://{fuzz_string}'" """))
+        run_win_cmd(f"""adb shell "am start -W -a android.intent.action.VIEW -d '{i}://{fuzz_string}'" """)
 
-def main():
+def main() -> None:
     run_win_cmd("""adb connect 127.0.0.1:62001""")
     string = get_fileContent('AndroidManifest.xml')
 
