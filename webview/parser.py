@@ -13,6 +13,10 @@ def run_win_cmd(cmd) -> str:
     for line in result:
         if "Complete" in line.replace(b'\n', b'').decode('utf-8'):
             print(chalk.bold(chalk.green(line.replace(b'\n', b'').decode('utf-8'))))
+        elif "already connected" in line.replace(b'\n', b'').decode('utf-8'):
+            print(chalk.red(line.replace(b'\n', b'').decode('utf-8')))
+        elif "connected" in line.replace(b'\n', b'').decode('utf-8'):
+            print(chalk.bold(chalk.green(line.replace(b'\n', b'').decode('utf-8'))))
         else:
             print(chalk.gray(line.replace(b'\n', b'').decode('utf-8')))
     if errcode is not None:
