@@ -39,6 +39,15 @@ def regex(pattern, string, split) -> list:
     if matchOB:
         return list2list(matchOB, split)
 
+
+def deeplink_fuzzing(deeplink_scheme):
+    fuzz_string='NABOMHALANG'
+    for i in deeplink_scheme:
+        time.sleep(10)
+        print("=============================================================")
+        print(f""" Command: adb shell "am start -W -a android.intent.action.VIEW -d '{i}://{fuzz_string}'" """)
+        run_win_cmd(f""" adb shell "am start -W -a android.intent.action.VIEW -d '{i}://{fuzz_string}'" """)
+
 def main():
     run_win_cmd("""adb connect 127.0.0.1:62001""")
     string = get_fileContent('AndroidManifest.xml')
@@ -51,15 +60,6 @@ def main():
     content_providers = regex(r'android:authorities=.*', string, '"')
 
     deeplink_fuzzing(scheme)
-
-def deeplink_fuzzing(deeplink_scheme):
-    fuzz_string='NABOMHALANG'
-    for i in deeplink_scheme:
-        time.sleep(10)
-        print("=============================================================")
-        print(f""" Command: adb shell "am start -W -a android.intent.action.VIEW -d '{i}://{fuzz_string}'" """)
-        run_win_cmd(f""" adb shell "am start -W -a android.intent.action.VIEW -d '{i}://{fuzz_string}'" """)
-
 
 if __name__ == '__main__':
     main()
