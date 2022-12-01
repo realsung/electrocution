@@ -1,10 +1,3 @@
-# android_app_package_name=$(cat AndroidManifest.xml | grep -o "package=.*" | cut -d'"' -f 2)
-# deeplink_scheme_array[0]=$(cat AndroidManifest.xml | grep -o "android:scheme=.*" | cut -d'"' -f 2)
-# deeplink_host_array[0]=$(cat AndroidManifest.xml | grep -o "android:host=.*" | cut -d'"' -f 2)
-# deeplink_pathPattern_array[0]=$(cat AndroidManifest.xml | grep -o "android:pathPattern=.*" | cut -d'"' -f 2)
-# exported_activities_enum[0]=$(cat AndroidManifest.xml | grep -Ei 'exported="true"' | grep -o "android:name=.*" | cut -d'"' -f 2)
-# exported_content_providers_enum[0]=$(cat AndroidManifest.xml | grep -o "android:authorities=.*" | cut -d'"' -f 2)
-
 import re
 import subprocess
 import time
