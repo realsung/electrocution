@@ -43,7 +43,7 @@ def regex(pattern, string, split) -> list:
 def deeplink_fuzzing(deeplink_scheme):
     fuzz_string='NABOMHALANG'
     for i in deeplink_scheme:
-        time.sleep(10)
+        time.sleep(5)
         print("=============================================================")
         print(f""" Command: adb shell "am start -W -a android.intent.action.VIEW -d '{i}://{fuzz_string}'" """)
         run_win_cmd(f""" adb shell "am start -W -a android.intent.action.VIEW -d '{i}://{fuzz_string}'" """)
