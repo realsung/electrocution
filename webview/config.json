@@ -1,0 +1,14 @@
+{
+    "rootpath": "C:\\Users\\nabom\\Desktop\\project\\weview\\webview",
+    "adb": {
+        "path": "C:\\Users\\nabom\\Desktop\\adb\\platform-tools"
+    },
+    "static": {
+        "annotation": [
+            "Landroid/webkit/JavascriptInterface"
+        ],
+        "string": [
+            "Landroid/webkit/WebView"
+        ]
+    }
+}
